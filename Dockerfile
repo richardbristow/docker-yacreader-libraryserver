@@ -9,7 +9,9 @@ RUN apk add --update --no-cache \
   cd /yacreader/compressed_archive/unarr; \
   git clone https://github.com/selmf/unarr.git unarr-master; \
   cd /yacreader/YACReaderLibraryServer; \
-  qmake-qt5 "CONFIG+=server_standalone" . && make && make install INSTALL_ROOT=/install;
+  qmake-qt5 "CONFIG+=server_standalone" .; \
+  make; \
+  make install INSTALL_ROOT=/install;
 
 FROM alpine:latest
 
