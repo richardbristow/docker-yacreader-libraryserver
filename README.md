@@ -16,6 +16,7 @@ The docker image is also available to be pulled from the GitHub container regist
 docker run --rm \
   -p 8080:8080 \
   -v /path/to/comics:/comics \
+  -v /path/to/config:/config \
   richardbristow/docker-yacreader-libraryserver
 ```
 
@@ -30,6 +31,7 @@ services:
     restart: unless-stopped
     volumes:
       - /path/to/comics:/comics
+      - /path/to/config:/config
     ports:
       - 8080:8080
 ```
