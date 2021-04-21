@@ -1,6 +1,6 @@
 # docker-yacreader-libraryserver
 
-![build-and-publish](https://github.com/richardbristow/docker-yacreader-libraryserver/actions/workflows/build-and-publish.yml/badge.svg)
+[![Build and Publish](https://github.com/richardbristow/docker-yacreader-libraryserver/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/richardbristow/docker-yacreader-libraryserver/actions/workflows/build-and-publish.yml)
 
 Runs a headless version of the [YACreader](https://github.com/YACReader/yacreader) library server in a container, using the alpine base image.
 
