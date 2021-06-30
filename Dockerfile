@@ -1,4 +1,4 @@
-FROM alpine:3.14.0 AS builder
+FROM alpine:3.14 AS builder
 
 RUN apk add --update --no-cache \
   build-base \
