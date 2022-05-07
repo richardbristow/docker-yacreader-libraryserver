@@ -1,4 +1,4 @@
-FROM alpine:3.15.0 AS builder
+FROM alpine:3.15 AS builder
 
 RUN apk add --update --no-cache \
   build-base \
@@ -6,14 +6,21 @@ RUN apk add --update --no-cache \
   poppler-qt5-dev \
   qt5-qtbase-dev \
   && git clone https://github.com/YACReader/yacreader.git \
-  && cd /yacreader/compressed_archive/unarr \
-  && git clone https://github.com/selmf/unarr.git unarr-master \
+  && git clone https://github.com/selmf/unarr.git \
+  # build and install unarr
+  && cd unarr \
+  && mkdir build \
+  && cd build \
+  && cmake .. -DBUILD_SHARED_LIBS=ON -DENABLE_7Z=ON \
+  && make \
+  && make install \
+  # build and install YACReaderLibraryServer
   && cd /yacreader/YACReaderLibraryServer \
-  && qmake-qt5 "CONFIG+=server_standalone" . \
+  && qmake-qt5 "CONFIG+=unarr server_standalone" . \
   && make \
   && make install INSTALL_ROOT=/install
 
-FROM alpine:3.15.0
+FROM alpine:3.15
 
 RUN apk add --update --no-cache \
   qt5-qtbase \
@@ -21,6 +28,7 @@ RUN apk add --update --no-cache \
   poppler-qt5
 
 COPY --from=builder /install /
+COPY --from=builder /usr/local /usr/local
 COPY /entrypoint.sh /
 
 VOLUME /config
