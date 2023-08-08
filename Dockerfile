@@ -1,4 +1,4 @@
-FROM alpine:3.17.1 AS builder
+FROM alpine:3.18.3 AS builder
 
 RUN apk add --update --no-cache \
   build-base \
@@ -20,7 +20,7 @@ RUN apk add --update --no-cache \
   && make \
   && make install INSTALL_ROOT=/install
 
-FROM alpine:3.17.1
+FROM alpine:3.18.3
 
 RUN apk add --update --no-cache \
   qt5-qtbase \
